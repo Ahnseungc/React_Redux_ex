@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const { value } = useSelector((state) => state.value);
+  const { count } = useSelector((state) => state.count);
+
+  const addValue = () => {
+    dispatch({ type: "increment" });
+  };
+  const subValue = () => {
+    dispatch({ type: "decrement" });
+  };
+  const resetValue = () => {
+    dispatch({ type: "reset" });
+  };
+  const pushButton = () => {
+    dispatch({ type: "push" });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>value: {value}</div>
+      <button onClick={addValue}> + </button>
+      <button onClick={subValue}> - </button>
+      <button onClick={resetValue}> reset </button>
+      <div>count: {count}</div>
+      <button onClick={pushButton}> click </button>
     </div>
   );
 }
